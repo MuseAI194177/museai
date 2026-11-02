@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b16">
+  <meta name="description" content="MuseAI — Không gian sáng tạo cùng trí tuệ nhân tạo. Biến ý tưởng thành hình ảnh, nội dung và cảm hứng mới.">
+  <title>MuseAI — Sáng tạo không giới hạn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090b16;
+      --panel: #111426;
+      --text: #f5f5fb;
+      --muted: #a6a9bd;
+      --purple: #a78bfa;
+      --pink: #f0abfc;
+      --line: rgba(255,255,255,.1);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 80% 8%, rgba(125, 79, 220, .20), transparent 34rem),
+        radial-gradient(ellipse at 5% 40%, rgba(55, 104, 190, .13), transparent 30rem),
+        var(--bg);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.6;
+    }
+    .container { width: min(1120px, calc(100% - 44px)); margin: auto; }
+    .brand {
+      display: inline-flex; align-items: center; gap: 11px;
+      margin-top: 28px; font: 700 1.35rem "Space Grotesk", sans-serif;
+      letter-spacing: -.7px;
+    }
+    .brand-mark {
+      display: grid; place-items: center; width: 36px; height: 36px;
+      border-radius: 12px; color: #100c20; font-weight: 800;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      box-shadow: 0 0 28px rgba(167,139,250,.35);
+    }
+    .hero {
+      min-height: 690px; display: grid; grid-template-columns: 1.05fr .95fr;
+      align-items: center; gap: 50px; padding: 76px 0 100px;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      color: #d8c8ff; border: 1px solid rgba(194,167,255,.25);
+      background: rgba(167,139,250,.09); border-radius: 99px;
+      padding: 8px 14px; font-size: .82rem; letter-spacing: .3px;
+    }
+    .eyebrow span { width: 7px; height: 7px; border-radius: 50%; background: #c4a7ff; box-shadow: 0 0 12px #c4a7ff; }
+    h1, h2, h3 { font-family: "Space Grotesk", sans-serif; line-height: 1.12; }
+    h1 { font-size: clamp(3.2rem, 6.6vw, 5.7rem); letter-spacing: -4px; margin: 24px 0; }
+    .gradient-text {
+      background: linear-gradient(100deg, #c4b5fd 10%, #f0abfc 55%, #93c5fd 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero-copy { max-width: 540px; color: var(--muted); font-size: 1.08rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 32px; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      border-radius: 12px; padding: 13px 20px; text-decoration: none;
+      font-weight: 700; transition: transform .2s, box-shadow .2s;
+    }
+    .button:hover { transform: translateY(-3px); }
+    .button-primary { color: #120d20; background: linear-gradient(110deg, #c4b5fd, #f0abfc); box-shadow: 0 10px 35px rgba(167,139,250,.22); }
+    .button-ghost { color: var(--text); border: 1px solid var(--line); background: rgba(255,255,255,.035); }
+    .hero-art { position: relative; min-height: 440px; display: grid; place-items: center; }
+    .orb {
+      position: absolute; width: 360px; height: 360px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #e9d5ff, #a78bfa 28%, #5b42a5 55%, #17132c 76%);
+      filter: drop-shadow(0 0 70px rgba(167,139,250,.28));
+      opacity: .88;
+    }
+    .hero-image {
+      position: relative; z-index: 1; width: min(390px, 90%); height: 430px;
+      object-fit: cover; border-radius: 190px 190px 28px 28px;
+      border: 1px solid rgba(255,255,255,.25);
+      box-shadow: 0 30px 90px rgba(0,0,0,.45);
+      mix-blend-mode: screen; opacity: .86;
+    }
+    .floating-note {
+      position: absolute; z-index: 2; right: -5px; bottom: 45px;
+      padding: 15px 18px; border: 1px solid var(--line); border-radius: 15px;
+      background: rgba(17,20,38,.82); backdrop-filter: blur(14px);
+      box-shadow: 0 18px 50px rgba(0,0,0,.3); font-size: .85rem;
+    }
+    .floating-note strong { display: block; color: #e9d5ff; font-size: 1rem; }
+    .section { padding: 75px 0; }
+    .section-heading { max-width: 650px; margin-bottom: 35px; }
+    .section-heading h2 { font-size: clamp(2.1rem, 4vw, 3.2rem); letter-spacing: -1.8px; margin: 13px 0; }
+    .section-heading p { color: var(--muted); margin: 0; }
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .feature {
+      overflow: hidden; border: 1px solid var(--line); border-radius: 19px;
+      background: linear-gradient(150deg, rgba(255,255,255,.065), rgba(255,255,255,.018));
+      transition: transform .25s, border-color .25s;
+    }
+    .feature:hover { transform: translateY(-6px); border-color: rgba(196,181,253,.45); }
+    .feature img { width: 100%; height: 190px; object-fit: cover; display: block; }
+    .feature-content { padding: 22px; }
+    .feature-number { color: #c4b5fd; font: 600 .8rem "Space Grotesk", sans-serif; }
+    .feature h3 { margin: 9px 0; font-size: 1.28rem; }
+    .feature p { color: var(--muted); font-size: .94rem; margin: 0; }
+    .statement {
+      margin: 70px 0; padding: 62px 30px; text-align: center;
+      border: 1px solid rgba(196,181,253,.18); border-radius: 26px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(167,139,250,.17), transparent 65%), #101222;
+    }
+    .statement h2 { max-width: 760px; margin: 0 auto 17px; font-size: clamp(2rem, 4vw, 3.3rem); letter-spacing: -1.6px; }
+    .statement p { max-width: 610px; margin: auto; color: var(--muted); }
+    footer { border-top: 1px solid var(--line); padding: 25px 0 35px; color: #85899f; font-size: .87rem; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; align-items: center; }
+    .footer-brand { color: var(--text); font: 700 1.05rem "Space Grotesk", sans-serif; }
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; gap: 5px; padding-top: 65px; text-align: center; }
+      .hero-copy { margin: auto; }
+      .actions { justify-content: center; }
+      .hero-art { min-height: 390px; }
+      .orb { width: 300px; height: 300px; }
+      .hero-image { height: 360px; width: 300px; }
+      .floating-note { right: 2%; bottom: 20px; }
+      .features { grid-template-columns: 1fr; }
+      .feature { display: grid; grid-template-columns: 38% 1fr; }
+      .feature img { height: 100%; min-height: 190px; }
+      .section-heading { text-align: center; margin-left: auto; margin-right: auto; }
+    }
+    @media (max-width: 520px) {
+      .container { width: min(100% - 30px, 1120px); }
+      h1 { letter-spacing: -2.5px; }
+      .feature { display: block; }
+      .feature img { height: 190px; }
+      .statement { padding: 45px 20px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="container">
+      <div class="brand" aria-label="MuseAI">
+        <span class="brand-mark">M</span>
+        <span>MuseAI</span>
+      </div>
+
+      <section class="hero">
+        <div>
+          <div class="eyebrow"><span></span> YOUR CREATIVE AI COMPANION</div>
+          <h1>Ý tưởng lớn.<br><span class="gradient-text">Sáng tạo</span> không giới hạn.</h1>
+          <p class="hero-copy">
+            Chào mừng đến với MuseAI — không gian nơi trí tưởng tượng gặp gỡ trí tuệ nhân tạo.
+            Khơi nguồn cảm hứng, khám phá những khả năng mới và biến ý tưởng của bạn thành điều có thể nhìn thấy.
+          </p>
+          <div class="actions">
+            <a class="button button-primary" href="mailto:hello@museai.example">Khám phá MuseAI <span aria-hidden="true">↗</span></a>
+            <a class="button button-ghost" href="#about">Tìm hiểu thêm</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="Hình ảnh nghệ thuật trừu tượng">
+          <div class="orb"></div>
+          <img class="hero-image" src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=900&q=85" alt="Tác phẩm nghệ thuật trừu tượng với màu sắc chuyển động">
+          <div class="floating-note">Một ý tưởng mới<strong>đang chờ được tạo ra ✦</strong></div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="section-heading">
+          <div class="eyebrow"><span></span> THE MUSEAI EXPERIENCE</div>
+          <h2>Không chỉ là công nghệ.<br><span class="gradient-text">Đó là nguồn cảm hứng.</span></h2>
+          <p>MuseAI giúp hành trình sáng tạo trở nên gần gũi hơn. Dù bạn đang bắt đầu một ý tưởng hay tìm kiếm góc nhìn khác biệt, luôn có không gian để thử nghiệm và bứt phá.</p>
+        </div>
+
+        <div class="features">
+          <article class="feature">
+            <img src="https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=800&q=85" alt="Tranh nghệ thuật trừu tượng nhiều màu sắc">
+            <div class="feature-content">
+              <span class="feature-number">01 / IMAGINE</span>
+              <h3>Khơi mở trí tưởng tượng</h3>
+              <p>Bắt đầu từ những suy nghĩ nhỏ nhất và phát triển chúng thành những concept độc đáo của riêng bạn.</p>
+            </div>
+          </article>
+          <article class="feature">
+            <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=800&q=85" alt="Không gian triển lãm nghệ thuật ánh sáng">
+            <div class="feature-content">
+              <span class="feature-number">02 / EXPLORE</span>
+              <h3>Khám phá khả năng mới</h3>
+              <p>Thử nghiệm nhiều phong cách, góc nhìn và cách thể hiện để tìm ra chất riêng trong từng sáng tạo.</p>
+            </div>
+          </article>
+          <article class="feature">
+            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=800&q=85" alt="Bàn làm việc sáng tạo với dụng cụ hội họa">
+            <div class="feature-content">
+              <span class="feature-number">03 / CREATE</span>
+              <h3>Biến ý tưởng thành hiện thực</h3>
+              <p>Đưa cảm hứng ra khỏi trang giấy, tạo nên sản phẩm mang dấu ấn và câu chuyện của chính bạn.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="statement">
+        <h2>Mọi sáng tạo đều bắt đầu từ <span class="gradient-text">một ý tưởng.</span></h2>
+        <p>Hãy để trí tò mò dẫn lối. MuseAI đồng hành cùng bạn trên hành trình khám phá những điều chưa từng được tưởng tượng.</p>
+        <div class="actions" style="justify-content:center">
+          <a class="button button-primary" href="mailto:hello@museai.example">Kết nối với MuseAI ↗</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span class="footer-brand">MuseAI ✦</span>
+      <span>© 2026 MuseAI. Made for curious minds.</span>
+      <span>Imagine more. Create freely.</span>
+    </div>
+  </footer>
+</body>
+</html>
